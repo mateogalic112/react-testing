@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <button
-        style={{ backgroundColor: buttonColor }}
+        style={{ backgroundColor: !checked ? buttonColor : "gray" }}
         onClick={() => setButtonColor(buttonColorText)}
         disabled={checked}
       >
