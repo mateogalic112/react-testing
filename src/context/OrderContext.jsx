@@ -8,6 +8,8 @@ import React, {
 
 import { pricePerItem } from "../constants";
 
+import { formatCurrency } from "../utilities";
+
 const OrderContext = createContext();
 
 export const useOrderContext = () => {
@@ -20,16 +22,16 @@ export const useOrderContext = () => {
   return context;
 };
 
-export const OrderProvider = (props) => {
+export const OrderContextProvider = (props) => {
   const [optionCounts, setOptionCounts] = useState({
     scoops: new Map(),
     toppings: new Map(),
   });
 
   const [totals, setTotals] = useState({
-    scoops: 0,
-    toppings: 0,
-    grandTotal: 0,
+    scoops: formatCurrency(0),
+    toppings: formatCurrency(0),
+    grandTotal: formatCurrency(0),
   });
 
   const calculateSubtotal = (optionType, optionCounts) => {
@@ -46,9 +48,9 @@ export const OrderProvider = (props) => {
     const toppingsSubtotal = calculateSubtotal("toppings", optionCounts);
     const grandTotal = scoopsSubtotal + toppingsSubtotal;
     setTotals({
-      scoops: scoopsSubtotal,
-      toppings: toppingsSubtotal,
-      grandTotal,
+      scoops: formatCurrency(scoopsSubtotal),
+      toppings: formatCurrency(toppingsSubtotal),
+      grandTotal: formatCurrency(grandTotal),
     });
   }, [optionCounts]);
 
@@ -65,5 +67,9 @@ export const OrderProvider = (props) => {
     return [{ ...optionCounts, totals }, updateItemCount];
   }, [optionCounts, totals]);
 
-  <OrderContext.Provider value={value}>{props.children}</OrderContext.Provider>;
+  return (
+    <OrderContext.Provider value={value} {...props}>
+      {props.children}
+    </OrderContext.Provider>
+  );
 };
