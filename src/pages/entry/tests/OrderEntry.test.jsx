@@ -8,7 +8,7 @@ test("Handles error for scoops and toppings", async () => {
     rest.get("http://localhost:3030/scoops", (req, res, ctx) => {
       res(ctx.status(500));
     }),
-    rest.get("htt://localhost:3030/toppings", (req, res, ctx) => {
+    rest.get("http://localhost:3030/toppings", (req, res, ctx) => {
       res(ctx.status(500));
     })
   );
