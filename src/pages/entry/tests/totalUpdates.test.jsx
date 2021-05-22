@@ -27,7 +27,7 @@ test("update scoop subtotal when scoops change", async () => {
 });
 
 test("update toppings subtotal when toppings change", async () => {
-  render(<Options optionType="toppings" />);
+  render(<Options optionType="toppings" />, { wrapper: OrderContextProvider });
 
   const toppingsTotal = screen.getByText("Toppings total: $", { exact: false });
   expect(toppingsTotal).toHaveTextContent("0.00");
