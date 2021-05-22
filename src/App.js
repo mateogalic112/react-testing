@@ -4,14 +4,14 @@ import Container from "react-bootstrap/Container";
 
 import OrderEntry from "./pages/entry/OrderEntry";
 
-import { OrderProvider } from "./context/OrderContext";
+import { OrderContextProvider } from "./context/OrderContext";
 
 function App() {
   return (
     <Container>
-      <OrderProvider>
+      <OrderContextProvider>
         <OrderEntry />
-      </OrderProvider>
+      </OrderContextProvider>
     </Container>
   );
 }
