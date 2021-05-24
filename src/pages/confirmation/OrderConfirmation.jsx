@@ -6,6 +6,7 @@ import { useOrderContext } from "../../context/OrderContext";
 export default function OrderConfirmation({ setOrderPhase }) {
   const [, , resetOrder] = useOrderContext();
   const [orderNumber, setOrderNumber] = useState(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     axios
@@ -15,8 +16,12 @@ export default function OrderConfirmation({ setOrderPhase }) {
       .then((response) => {
         setOrderNumber(response.data.orderNumber);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setError(true));
   }, []);
+
+  if (error) {
+    //
+  }
 
   function handleClick() {
     // clear the order details
