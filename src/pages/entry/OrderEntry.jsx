@@ -1,10 +1,11 @@
+import Button from "react-bootstrap/Button";
 import Options from "./Options";
 import { useOrderContext } from "../../context/OrderContext";
 
-import Button from "react-bootstrap/Button";
-
 export default function OrderEntry({ setOrderPhase }) {
   const [orderDetails] = useOrderContext();
+
+  // disable order button if there aren't any scoops in order
   const orderDisabled = orderDetails.totals.scoops === "$0.00";
 
   return (
