@@ -1,6 +1,6 @@
 import React from "react";
 import SummaryForm from "./SummaryForm";
-import { useOrderContext } from "../../contexts/OrderContext";
+import { useOrderContext } from "../../context/OrderContext";
 
 export default function OrderSummary({ setOrderPhase }) {
   const [orderDetails] = useOrderContext();
