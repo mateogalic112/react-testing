@@ -58,7 +58,7 @@ test("order phases for happy path", async () => {
   expect(loading).toBeInTheDocument();
 
   const thankYouHeader = await screen.findByRole("heading", {
-    name: "Thank you!",
+    name: /thank you/i,
   });
   expect(thankYouHeader).toBeInTheDocument();
 

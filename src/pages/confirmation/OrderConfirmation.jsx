@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import { useOrderContext } from "../../context/OrderContext";
+import AlertBanner from "../common/AlertBanner";
 
 export default function OrderConfirmation({ setOrderPhase }) {
   const [, , resetOrder] = useOrderContext();
@@ -20,7 +21,7 @@ export default function OrderConfirmation({ setOrderPhase }) {
   }, []);
 
   if (error) {
-    //
+    return <AlertBanner />;
   }
 
   function handleClick() {

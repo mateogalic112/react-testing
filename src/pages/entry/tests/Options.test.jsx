@@ -1,5 +1,5 @@
 import { render, screen } from "../../../test-utils/testing-library-utils";
-
+import userEvent from "@testing-library/user-event";
 import Options from "../Options";
 
 test("displays image for each scoop option from server", async () => {
@@ -24,11 +24,23 @@ test("Displays image for each toppings option from server", async () => {
   expect(images).toHaveLength(3);
 
   // check the actual alt text for the images
-  // @ts-ignore
   const imageTitles = images.map((img) => img.alt);
   expect(imageTitles).toEqual([
     "Cherries topping",
     "M&Ms topping",
     "Hot fudge topping",
   ]);
+});
+
+test("dont't update total if scoops input is invalid", async () => {
+  render(<Options optionType="scoops" />);
+
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: "Vanilla",
+  });
+  userEvent.clear(vanillaInput);
+  userEvent.type(vanillaInput, "-1");
+
+  const scoopsTotal = screen.getByText("Scoops total: $0.00");
+  expect(scoopsTotal).toBeInTheDocument();
 });
