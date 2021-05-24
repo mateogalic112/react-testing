@@ -63,8 +63,14 @@ export const OrderContextProvider = (props) => {
 
       setOptionCounts(newOptionCounts);
     };
+    function resetOrder() {
+      setOptionCounts({
+        scoops: new Map(),
+        toppings: new Map(),
+      });
+    }
 
-    return [{ ...optionCounts, totals }, updateItemCount];
+    return [{ ...optionCounts, totals }, updateItemCount, resetOrder];
   }, [optionCounts, totals]);
 
   return (
